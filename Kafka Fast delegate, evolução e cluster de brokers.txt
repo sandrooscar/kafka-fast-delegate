@@ -1,3 +1,7 @@
 ***AULA01
+O processo de serialização e desserialização só usa os campos, não importa se a classe Order de fraud ppossui mais métodos que a classe Order do new-order
+** O LogService só pega os tópicos depois que foram criados, se forem criados durante o processo em que ele já estiver rodando, os mesmos não serão detectados. 
+É preciso derrubar os serviços e rodar novamente.
+
 
 

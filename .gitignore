@@ -2,3 +2,8 @@
 /.settings
 .classpath
 .project
+/common-kafka/.settings
+/service-email/.settings
+/service-fraud-detector/.settings
+/service-log/.settings
+/service-new-order/.settings
