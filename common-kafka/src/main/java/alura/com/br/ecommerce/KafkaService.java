@@ -44,8 +44,10 @@ public class KafkaService<T> implements Closeable{
 				for (ConsumerRecord<String, T> record : records) {
 					try {
 						parse.consume(record);
-					} catch (InterruptedException | ExecutionException e) {
-						// so far, just loggin the exception for this message
+					} catch (Exception e) {
+						//only catches Exception because no matter which Exception
+						//i want to recover and parse the next one
+						// so far, just logging the exception for this message
 						e.printStackTrace();
 					}
 				}
