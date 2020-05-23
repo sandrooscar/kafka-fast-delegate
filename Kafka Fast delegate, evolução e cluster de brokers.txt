@@ -10,5 +10,5 @@ Como lidar com patterns e novos topics
 Como acessar um banco de dados
 Problemas de schema que vão sendo levantados durante a evolução dos serviços
 
-
+***AULA02
 

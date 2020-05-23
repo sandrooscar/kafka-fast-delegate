@@ -14,12 +14,13 @@ public class NewOrderMain {
 					String userId = UUID.randomUUID().toString();
 					String orderId = UUID.randomUUID().toString();
 					BigDecimal amount = new BigDecimal(Math.random() * 5000 + 1);
-					Order order = new Order(userId, orderId, amount);
+					String email = Math.random()+"@teste.com";
+					Order order = new Order(userId, orderId, amount, email);
 
 					orderDispatcher.send("ECOMMERCE_NEW_ORDER", userId, order);
 
-					Email email = new Email("Order", "Thank you for your order! We are processing your order!");
-					emailDispatcher.send("ECOMMERCE_SEND_EMAIL", userId, email);
+					Email emailCode = new Email("Order", "Thank you for your order! We are processing your order!");
+					emailDispatcher.send("ECOMMERCE_SEND_EMAIL", userId, emailCode);
 				}
 			}
 		}

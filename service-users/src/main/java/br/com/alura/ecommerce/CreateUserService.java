@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -20,7 +18,7 @@ public class CreateUserService {
 	public CreateUserService() throws SQLException {
 		String url = "jdbc:sqlite:target/users_database.db";
 		this.connection = DriverManager.getConnection(url);
-		connection.createStatement().execute("create table users ( "
+		connection.createStatement().execute("create table IF NOT EXISTS users ( "
 				+ "uuid varchar(200) primary key, "
 				+ "email varchar(200) )");
 	}
@@ -44,21 +42,23 @@ public class CreateUserService {
 		System.out.println(record.value());
 		Order order = record.value();
 		if (isNewUser(order.getEmail())){
-			insertNewUser(order.getEmail());
+			insertNewUser(order.getUserId(), order.getEmail());
 		}
 	}
 
 /**
  * Necessary treatment for userid, in the next class this problem will be corrected 
  * @param email
+ * @param userId 
  * @throws SQLException
  */
-	private void insertNewUser(String email) throws SQLException {
-//		PreparedStatement ps = connection.prepareStatement("insert into users (uuid, email) "
-//				+ "values (?, ?) ");
-//		ps.setString(1, <precisa do id do usuário>);
-//		ps.setString(2, email);
-		
+	private void insertNewUser(String email, String userId) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement("insert into users (uuid, email) "
+				+ "values (?, ?) ");
+		ps.setString(1, userId);
+		ps.setString(2, email);
+		ps.execute();
+		System.out.println("New user "+email+" insert be sucessful!");
 	}
 
 	private boolean isNewUser(String email) throws SQLException {
