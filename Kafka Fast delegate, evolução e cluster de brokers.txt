@@ -18,3 +18,8 @@ Objetivo é garantir que todas as compras de um mesmo usuário venham em ordem.
 Para a mesma chave a execução é sequencial.
 Chaves distintas torna o processo paralelo.
 
+O que aprendemos nessa aula:
+
+como evoluir um serviço sem quebrar os schemas
+como pensar a evolução de um serviço
+discutindo UUID e id único
