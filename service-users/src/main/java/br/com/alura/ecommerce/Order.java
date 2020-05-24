@@ -3,6 +3,11 @@ package br.com.alura.ecommerce;
 import java.math.BigDecimal;
 
 public class Order {
+	@Override
+	public String toString() {
+		return "Service Users - Order [userId=" + userId + ", orderId=" + orderId + ", amount=" + amount + ", email=" + email + "]";
+	}
+
 	private final String userId, orderId;
 	private final BigDecimal amount;
 	private String email;

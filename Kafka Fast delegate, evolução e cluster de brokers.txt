@@ -12,3 +12,5 @@ Problemas de schema que vão sendo levantados durante a evolução dos serviços
 
 ***AULA02
 
+Para a mesma chave a execução é sequencial.
+A ideia é garantir que todas as compras do mesmo usuário sejam processadas em ordem. 

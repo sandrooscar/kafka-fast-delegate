@@ -41,8 +41,9 @@ public class CreateUserService {
 		System.out.println("Processing new order, checking for new user");
 		System.out.println(record.value());
 		Order order = record.value();
+		System.out.println("--> "+order);
 		if (isNewUser(order.getEmail())){
-			insertNewUser(order.getUserId(), order.getEmail());
+			insertNewUser(order.getEmail(), order.getUserId());
 		}
 	}
 
