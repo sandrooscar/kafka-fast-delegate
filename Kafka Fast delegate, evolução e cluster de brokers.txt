@@ -23,3 +23,10 @@ O que aprendemos nessa aula:
 como evoluir um serviço sem quebrar os schemas
 como pensar a evolução de um serviço
 discutindo UUID e id único
+
+***AULA03
+Servidor http como ponto de entrada
+
+***AULA04
+Quanto menos código no servidor http melhor, mais rápido de mandar a mensagem para o broker e termos um "log do que aconteceu". 
+Fazendo o tratamento dessa forma temos menas chance de acontecer algum erro e perdermos a mensagem.
