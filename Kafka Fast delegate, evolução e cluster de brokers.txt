@@ -12,5 +12,9 @@ Problemas de schema que vão sendo levantados durante a evolução dos serviços
 
 ***AULA02
 
+A key pelo usuário garantia que: se um usuário fizesse duas compras, será processada a primeira compra e depois a segunda, ou seja, os pedidos são processados na ordem pela chave do usuário. 
+Para a mesma chave é executado sequencialmente. Se o usuário faz três compras, a tentativa de processamento é na 1 depois na 2 e por ultimo na 3.
+Objetivo é garantir que todas as compras de um mesmo usuário venham em ordem.
 Para a mesma chave a execução é sequencial.
-A ideia é garantir que todas as compras do mesmo usuário sejam processadas em ordem. 
+Chaves distintas torna o processo paralelo.
+

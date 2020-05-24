@@ -1,30 +1,34 @@
 package alura.com.br.ecommerce;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class Order {
-	private final String userId, orderId;
-	public String getUserId() {
-		return userId;
-	}
-
+	private final String orderId;
 	private final BigDecimal amount;
-	
-	
+	private final String email;
+	private final LocalDateTime orderDate;
 
-	public Order(String userId, String orderId, BigDecimal amount) {
+	public Order(String orderId, BigDecimal amount, String email, LocalDateTime orderDate) {
 		super();
-		this.userId = userId;
 		this.orderId = orderId;
 		this.amount = amount;
+		this.email = email;
+		this.orderDate = orderDate;
 	}
 	
 	public BigDecimal getAmount() {
 		return amount;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	@Override
 	public String toString() {
-		return "Order [userId=" + userId + ", orderId=" + orderId + ", amount=" + amount + "]";
+		return "Order [orderId=" + orderId + ", amount=" + amount + ", email=" + email + ", orderDate=" + orderDate
+				+ "]";
 	}
+	
 }

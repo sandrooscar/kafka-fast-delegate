@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -43,7 +44,7 @@ public class CreateUserService {
 		Order order = record.value();
 		System.out.println("--> "+order);
 		if (isNewUser(order.getEmail())){
-			insertNewUser(order.getEmail(), order.getUserId());
+			insertNewUser(order.getEmail());
 		}
 	}
 
@@ -53,10 +54,10 @@ public class CreateUserService {
  * @param userId 
  * @throws SQLException
  */
-	private void insertNewUser(String email, String userId) throws SQLException {
+	private void insertNewUser(String email) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement("insert into users (uuid, email) "
 				+ "values (?, ?) ");
-		ps.setString(1, userId);
+		ps.setString(1, UUID.randomUUID().toString());
 		ps.setString(2, email);
 		ps.execute();
 		System.out.println("New user "+email+" insert be sucessful!");
