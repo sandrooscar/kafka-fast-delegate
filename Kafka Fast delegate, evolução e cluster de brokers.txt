@@ -27,6 +27,64 @@ discutindo UUID e id único
 ***AULA03
 Servidor http como ponto de entrada
 
-***AULA04
 Quanto menos código no servidor http melhor, mais rápido de mandar a mensagem para o broker e termos um "log do que aconteceu". 
 Fazendo o tratamento dessa forma temos menas chance de acontecer algum erro e perdermos a mensagem.
+
+O que aprendemos nessa aula:
+
+como usar um servidor http embarcado
+como criar um serviço http
+como enviar mensagens a partir do servidor http
+a vantagem de um fast delegate
+
+***AULA04
+O número de consumidores deve ser menor ou igual ao numero de partições para paralelizarmos.
+Na atual configuração se um dos consumidores cair, o outro assume a partição.
+
+**> Configurando mais de um broker (na mesma máquina):
+Alterando o id do broker 2, após copiar o arquivo server.properties. Utilizamos o id 2 para facilitar a identificação.
+# The id of the broker. This must be set to a unique integer for each broker.
+broker.id=2
+
+Tem que mudar o diretório dos log:
+# A comma separated list of directories under which to store log files
+log.dirs=
+
+Como é na mesma máquina, é necessário alterar a porta, o ideal seria rodar o kafka em duas ou mais máquinas distintas.
+listeners=PLAINTEXT://:9093
+
+Não é possivel alterar o via comando de alteração do topico a quantidade de replicas, só no momento da criação do topico é possivel definir.
+
+-Incluir a propriedade 
+default.replication.factor=2
+
+no server.properties e no server2.properties
+
+derrubar zookepeer, kafka e apagar filas do diretorio
+
+star no zookepeer e nos dois server kafka.
+
+isr-> indica quantas replicas estão atualizadas
+leader none -> em alguns casos alguns dados podem ficar sem replicas, somente quando o server que caiu sobre é que esse dados do respectivo consumidor é destravado.
+Como o kafka asmazena a ultima mensagem lida em um tópico, se esse kafka broker cair, essa informação é perdida pq o replication factory é 1.
+
+**> Evitando o ponto de falha no broker com os metadados internos dos tópicos
+Abrir o server.properties e chegar neste ponto:
+
+############################# Internal Topic Settings  #############################
+# The replication factor for the group metadata internal topics "__consumer_offsets" and "__transaction_state"
+# For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.
+offsets.topic.replication.factor=3
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=3
+
+Como é alertado no próprio comentário, esse valor deve ser maior do que 1 e o valor geralmente utilizado é 3
+É interessante também configurar o default.replication.factor de 2 para 3
+
+no curso criamos configuração para 5 brokers na mesma maquina alterando as portas.
+
+**>configurando em duas máquinas distintas
+https://kafka.apache.org/quickstart#quickstart_multibroker
+
+
+
