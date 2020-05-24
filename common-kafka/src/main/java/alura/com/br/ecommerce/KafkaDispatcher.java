@@ -19,11 +19,12 @@ public class KafkaDispatcher<T> implements Closeable {
 	
 	private Properties properties() {
 		Properties properties = new  Properties();
-		//informa o endereço(s) dos servidores kafka
+		//informa o endereï¿½o(s) dos servidores kafka
 		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-		//Iinformar o serializador, tanto chave quanto valor são Strings, necessário informar no properties do Kafka
+		//Iinformar o serializador, tanto chave quanto valor sï¿½o Strings, necessï¿½rio informar no properties do Kafka
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GsonSerializer.class.getName());
+		properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
 		
 		return properties;
 	}

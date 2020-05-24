@@ -86,5 +86,34 @@ no curso criamos configuração para 5 brokers na mesma maquina alterando as porta
 **>configurando em duas máquinas distintas
 https://kafka.apache.org/quickstart#quickstart_multibroker
 
+ISR => in sync replicas
+
+**> configurações de recebimento de mensagem
+Situações:
+
+Lider recebe mas não atualiza as replicas (replicas off line)
+Lider recebe, cai, e as replicas estão desatualizadas
+Lider receber e se replicou ou não, tanto faz, normal perder uma ou outra mensagem
+
+No curso e na maioria dos casos é comum a configuração ALL, só é ACK quando a mensagem for replicada para os WB replicas (slaves). Estamos garantindo que em pelo menos mais dois lugares teremos cópia d amensagem.
+
+O ALL espera uma replica que está sincronizada responser, respondendo, tudo ok.
+Se eu tenho N replicas, só terei a garantia das N replicas se meu ACKs for ALL, se meu ACKs for 1, eu tenho as N replicas, mas corro o risco de receber a uma confirmação que somente uma delas ficou sabendo.
+Mesmo no ACKs all pode acontecer, pq pode chegar ao ponto de ter apenas uma maquina rodando e as restantes estão offline.
+
+A ideia é trabalhar com número de partições, replicações e ACK all para garantir que os dados estejam em algum lugar.
+"Trabalhar com o número de partições, número de réplicas e acks all para o máximo de reliability de segurança de que os dados estão em algum lugar e serão consumidos."
+
+O que aprendemos nessa aula:
+
+o problema do single point of failure
+a recuperação mais simples de um broker
+a recuperação e o rebalanceamento de um serviço
+como levantar mais um broker e rodar um cluster
+como efetuar a replicação
+o que é um líder
+a configuração do acks 0, 1 e all
+como utilizar garantias, reliability, velocidade, partições e replicação
+
 
 
